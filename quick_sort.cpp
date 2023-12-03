@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int partition(vector<int> vec, int low, int high) {
+int partition(vector<int>& vec, int low, int high) {
     // change to struct instead of int
     // test
 
