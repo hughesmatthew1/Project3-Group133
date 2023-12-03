@@ -4,37 +4,59 @@
 
 using namespace std;
 
-void heapify(vector<int>& vec, int root, int size){
+void heapify(vector<StockData>& vec, int root, int size, int comp){
     // Assign the indexes of the subtree's root, left child, and right child
     int min = root;
     int left = 2*root + 1;
     int right = 2*root + 2;
 
-    // Checks if left child exists, if left is less than current minimum
-    if (left < size && vec[left] < vec[min]){
+    // When comp == 0, we are sorting based on open value
+    // Checks if left child exists, if left open is less than current minimum close
+    if (comp == 0 && left < size && vec[left].openLT(vec[min])){
         min = left;
     }
-    // Checks if right child exists, if right is less than current minimum
-    if (right < size && vec[right] < vec[min]){
+    // Checks if right child exists, if right open is less than current minimum close
+    if (comp == 0 && right < size && vec[right].openLT(vec[min])){
         min = right;
     }
+
+    // When comp == 1, we are sorting based on close value
+    // Checks if left child exists, if left close is less than current minimum close
+    if (comp == 1 && left < size && vec[left].closeLT(vec[min])){
+        min = left;
+    }
+    // Checks if right child exists, if right open is less than current minimum close
+    if (comp == 1 && right < size && vec[right].closeLT(vec[min])){
+        min = right;
+    }
+
+    // When comp == 2, we are sorting based on pIncrease value
+    // Checks if left child exists, if left open is less than current minimum inc
+    if (comp == 2 && left < size && vec[left].incLT(vec[min])){
+        min = left;
+    }
+    // Checks if right child exists, if right open is less than current minimum inc
+    if (comp == 2 && right < size && vec[right].incLT(vec[min])){
+        min = right;
+    }
+
     // If a child is less than root
     if (min != root){
         // Swamp with lesser child
         swap(vec[min], vec[root]);
         // Recursively call heapify on the child you swap with
-        heapify(vec, min, size);
+        heapify(vec, min, size, comp);
     }
 }
 
-vector<int> heap_sort(vector<int> vec){
+vector<StockData> heap_sort(vector<StockData> vec, int comp){
     // Create Copy of input vector so it doesnt get modified
     int size = vec.size();
 
     // Make the vector into a heap
     // Heapifies all non-leaf nodes
     for (int i = size/2; i >= 0; i--){
-        heapify(vec, i, size);
+        heapify(vec, i, size, comp);
     }
 
     // Reorder the heap using heapify (min heap)
@@ -43,39 +65,8 @@ vector<int> heap_sort(vector<int> vec){
         // Move root to end
         swap(vec[0], vec[i]);
         // Heapify from root of tree
-        heapify(vec, 0, i);
+        heapify(vec, 0, i, comp);
     }
     // Returns sorted copy of vector
     return vec;
-}
-
-
-int main(){
-    vector<int> test;
-
-    test.push_back(17);
-    test.push_back(7);
-    test.push_back(13);
-    test.push_back(6);
-    test.push_back(9);
-    test.push_back(8);
-    test.push_back(2);
-    test.push_back(19);
-    test.push_back(20);
-
-    vector<int> sorted_test = heap_sort(test);
-
-    for (auto& i : test){
-        cout << i << ", ";
-    }
-    cout << endl;
-
-    for (auto& i : sorted_test){
-        cout << i << ", ";
-    }
-
-
-    string buffer;
-    cin >> buffer;
-
 }
