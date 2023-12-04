@@ -1,3 +1,9 @@
+//
+// Created by Matthew Hughes on 12/3/23.
+//
+
+#pragma once
+
 #include "StockData.h"
 #include <vector>
 #include <iostream>
