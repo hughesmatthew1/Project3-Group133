@@ -42,8 +42,13 @@ int main(){
     }
 
     // UI
-    // Call Sorts
+
+    // Call Sorts & track time taken
+
+    // Templates for sort calls:
+    // heap_sort(stockVec, 0 1 or 2)
+    // vecQuickSort(stockVec, 0 1 or 2)
+
     // Output
 
 }
-
