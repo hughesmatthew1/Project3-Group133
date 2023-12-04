@@ -1,45 +1,20 @@
 #pragma once
+
 #include <string>
 
-using namespace std;
-
-struct StockData{
-    string symbol;
-    string date;
+struct StockData {
+    std::string symbol;
+    std::string date;
     float open;
     float close;
-    float pIncrease;
+    float increase;
 
     // Comparison operators for each numerical member data
-
-    bool openGT(const StockData& rhs) const
-    {
-        return this->open > rhs.open;
-    }
-
-    bool closeGT(const StockData& rhs) const
-    {
-        return this->close > rhs.close;
-    }
-
-    bool incGT(const StockData& rhs) const
-    {
-        return this->pIncrease > rhs.pIncrease;
-    }
-
-    bool openLT(const StockData& rhs) const
-    {
-        return this->open < rhs.open;
-    }
-
-    bool closeLT(const StockData& rhs) const
-    {
-        return this->close < rhs.close;
-    }
-
-    bool incLT(const StockData& rhs) const
-    {
-        return this->pIncrease < rhs.pIncrease;
-    }
-    
+    bool openGT(const StockData& rhs) const;
+    bool closeGT(const StockData& rhs) const;
+    bool incGT(const StockData& rhs) const;
+    bool openLT(const StockData& rhs) const;
+    bool closeLT(const StockData& rhs) const;
+    bool incLT(const StockData& rhs) const;
+    std::string getString();
 };
